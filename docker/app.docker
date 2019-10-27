@@ -1,0 +1,43 @@
+FROM php:7.2-fpm
+
+RUN apt-get update && apt-get install -y mariadb-client \
+    libz-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libpq-dev \
+    g++ \
+    libicu-dev \
+    libxml2-dev \
+    libgmp-dev\
+    libxslt-dev \
+    git \
+    vim \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libmcrypt-dev \
+    zlib1g-dev \
+    libmagickwand-dev --no-install-recommends \
+    tesseract-ocr \ 
+    imagemagick \
+    ghostscript 
+    
+RUN docker-php-ext-configure intl \
+    && docker-php-ext-install mbstring \
+    && docker-php-ext-install intl \
+    && docker-php-ext-install zip \
+    && docker-php-ext-configure gmp \
+    && docker-php-ext-install gmp\
+    && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install pdo_pgsql \
+    && docker-php-ext-install soap \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-install opcache \
+    && docker-php-ext-install mysqli \
+    && pecl install apcu \
+    && docker-php-ext-enable apcu
+WORKDIR /var/www
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN composer --version
