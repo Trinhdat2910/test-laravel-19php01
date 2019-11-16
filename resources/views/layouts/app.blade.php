@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="{{ asset('layout/plugins/jqvmap/jqvmap.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('layout/dist/css/adminlte.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('layout/plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ asset('layout/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <!-- Daterange picker -->
@@ -77,11 +78,15 @@
 <script src="{{ asset('layout/plugins/summernote/summernote-bs4.min.js')}}"></script>
 <!-- overlayScrollbars -->
 <script src="{{ asset('layout/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+
+<script src="{{ asset('layout/plugins/datatables/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('layout/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('layout/dist/js/adminlte.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('layout/dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('layout/dist/js/demo.js')}}"></script>
+@yield('script')
 </body>
 </html>
