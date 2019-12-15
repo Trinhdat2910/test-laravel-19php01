@@ -31,7 +31,7 @@
 	<link rel="stylesheet" href="{{asset('layout_home/css/bootstrap-datepicker.css')}}">
 	<!-- Flaticons  -->
 	<link rel="stylesheet" href="{{asset('layout_home/fonts/flaticon/font/flaticon.css')}}">
-
+	<link href="{{ asset('layout_home/toastr/toastr.min.css') }}" rel="stylesheet">
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="{{asset('layout_home/css/style.css')}}">
 
@@ -73,8 +73,10 @@
 	<script src="{{asset('layout_home/js/bootstrap-datepicker.js')}}"></script>
 	<!-- Stellar Parallax -->
 	<script src="{{asset('layout_home/js/jquery.stellar.min.js')}}"></script>
+	
+    <script src="{{ asset('layout_home/toastr/toastr.min.js') }}"></script>
 	<!-- Main -->
 	<script src="{{asset('layout_home/js/main.js')}}"></script>
-
+	@yield('script_home')
 	</body>
 </html>

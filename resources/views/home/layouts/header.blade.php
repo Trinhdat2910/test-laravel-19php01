@@ -6,9 +6,9 @@
                     <div id="colorlib-logo"><a href="index.html">Footwear</a></div>
                 </div>
                 <div class="col-sm-5 col-md-3">
-                <form action="#" class="search-wrap">
+                <form action="{{route('home.collection', ['key' => 'collection'])}}" class="search-wrap" method="GET">
                    <div class="form-group">
-                      <input type="search" class="form-control search" placeholder="Search">
+                      <input type="search" class="form-control search" name="search" placeholder="Search">
                       <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
                    </div>
                 </form>
@@ -17,46 +17,37 @@
             <div class="row">
                 <div class="col-sm-12 text-left menu-1">
                     <ul>
-                        <li class="active"><a href="/">Home</a></li>
-                        <li class="has-dropdown">
-                            <a href="/men">Men</a>
-                            <ul class="dropdown">
-                                <li><a href="product-detail.html">Product Detail</a></li>
-                                <li><a href="cart.html">Shopping Cart</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="order-complete.html">Order Complete</a></li>
-                                <li><a href="add-to-wishlist.html">Wishlist</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="women.html">Women</a></li>
+                        <li class="active"><a href="{{route('home.index')}}">Home</a></li>
+                        <li><a href="{{route('home.collection', ['key' => 'men'])}}">Men</a></li>
+                        <li><a href="{{route('home.collection', ['key' => 'women'])}}">Women</a></li>
                         <li><a href="/about">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li class="cart"><a href="cart.html"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+                        @if(Auth::check())
+                        <li class="cart">
+                            <div class="nav-item dropdown">
+                                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="text-mine-shaft mr-2">Hi, {{ Auth::user()->name }}</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{{route('home.products.getOrder')}}">Đơn Hàng</a>
+                                    <a class="dropdown-item" href="{{route('home.user.getProfile', ['id' => Auth::user()->id])}}">Cập Nhật Thông Tin</a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                        Đăng Xuất
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="cart"><a href="{{route('home.cart')}}"><i class="icon-shopping-cart"></i> Giỏ Hàng </a></li>
+                        @else
+                        <li class="cart"><a href="{{route('login')}}"> Đăng Nhập</a></li>
+                        @endif
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    <div class="sale">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 offset-sm-2 text-center">
-                    <div class="row">
-                        <div class="owl-carousel2">
-                            <div class="item">
-                                <div class="col">
-                                    <h3><a href="#">25% off (Almost) Everything! Use Code: Summer Sale</a></h3>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="col">
-                                    <h3><a href="#">Our biggest sale yet 50% off all summer shoes</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </nav>

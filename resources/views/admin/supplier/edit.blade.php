@@ -12,8 +12,8 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Supplier</a></li>
-                <li class="breadcrumb-item active">Update</li>
+                <li class="breadcrumb-item"><a href="#">Nhà cung cấp</a></li>
+                <li class="breadcrumb-item active">Cập nhật</li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
@@ -23,7 +23,7 @@
         <div class="container-fluid">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Update Supplier</h3>
+                    <h3 class="card-title">Cập nhật nhà cung cấp</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -31,8 +31,8 @@
                     @csrf
                     <div class="card-body">
                     <div class="form-group">
-                        <label for="exampleInputName1">Name</label>
-                        <input type="text" class="form-control" name="name" id="exampleInputName1" placeholder="Supplier Name" value="{{$oSupplier->name}}">
+                        <label for="exampleInputName1">Tên Nhà cung cấp</label>
+                        <input type="text" class="form-control" name="name" id="exampleInputName1" placeholder="Tên Nhà cung cấp" value="{{$oSupplier->name}}">
                     </div>
                     @error('name')
                         <span class="invalid-feedback" role="alert">
@@ -40,8 +40,8 @@
                         </span>
                     @enderror
                     <div class="form-group">
-                        <label for="exampleInputPhone2">Phone</label>
-                        <input type="text" class="form-control" name="phone" id="exampleInputPhone2" placeholder="Phone Number" value="{{$oSupplier->phone_number}}">
+                        <label for="exampleInputPhone2">Số điện thoại</label>
+                        <input type="text" class="form-control" name="phone" id="exampleInputPhone2" placeholder="Số điện thoại" value="{{$oSupplier->phone_number}}">
                     </div>
                     @error('phone')
                         <span class="invalid-feedback" role="alert">
@@ -49,8 +49,8 @@
                         </span>
                     @enderror
                     <div class="form-group">
-                        <label for="exampleInputAddress1">Address</label>
-                        <textarea class="form-control" id="exampleInputAddress1" name="address" placeholder="Address">{{$oSupplier->address}}</textarea>
+                        <label for="exampleInputAddress1">Địa chỉ</label>
+                        <textarea class="form-control" id="exampleInputAddress1" name="address" placeholder="Địa chỉ">{{$oSupplier->address}}</textarea>
                     </div>
                     @error('address')
                         <span class="invalid-feedback" role="alert">
@@ -62,11 +62,25 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                    <input type="submit" class="btn btn-primary" value="UPDATE">
+                    <input type="submit" class="btn btn-primary" value="Cập nhật">
                     </div>
                 </form>
             </div>
         </div>
     </section>
 </div>
+@endsection
+@section('script')
+<script>
+    $(document).ready(function(){
+        @if(Session::has('message'))
+            @if (Session::get('class') == 'error')
+                toastr.error('{{ Session::get('message') }}')
+            @else
+                toastr.success('{{ Session::get('message') }}')
+            @endif
+        @endif
+        
+    })
+</script>
 @endsection

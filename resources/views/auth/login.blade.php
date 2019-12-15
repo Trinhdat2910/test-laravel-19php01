@@ -22,7 +22,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{ route('home') }}"><b>FOOTWEAR</b>SHOP</a>
+    <a href="{{ route('home.index') }}"><b>FOOTWEAR</b>SHOP</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">

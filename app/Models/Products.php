@@ -28,7 +28,7 @@ class Products extends Model
      * @retun mix
      */
     public function warehousing() {
-        return $this->hasMany('App\Models\Warehousing', 'product_id', 'id');
+        return $this->hasMany('App\Models\Warehousing', 'products_id', 'id');
     }
     /**
      * Relation with model productdetails
@@ -36,7 +36,7 @@ class Products extends Model
      * @retun mix
      */
     public function productdetails() {
-        return $this->hasMany('App\Models\ProductDetails', 'product_id', 'id');
+        return $this->hasMany('App\Models\ProductDetails', 'products_id', 'id');
     }
     /**
      * Add a new product
@@ -77,6 +77,22 @@ class Products extends Model
         $listProducts = $this->all();
         return $listProducts;
     }
+    public function getProductsHot() {
+        $listProducts = $this->all()->random()->where('status', 1)->paginate(20);
+        return $listProducts;
+    }
+    public function getProductById($id) {
+        $oProducts = $this->find($id);
+        return $oProducts;
+    }
+    public function getProductsMen() {
+        $listProducts = $this->where('product_type_id', 1)->where('status', 1)->paginate(20);
+        return $listProducts;
+    }
+    public function getProductsWomen() {
+        $listProducts = $this->where('product_type_id', 2)->where('status', 1)->paginate(20);
+        return $listProducts;
+    }
     public function deleteProducts($id) {
         $oProduct = $this->find($id);
         if(! $oProduct->destroy($id)){
@@ -84,10 +100,7 @@ class Products extends Model
         }
         return $oProduct;
     }
-    public function getProductById($id) {
-        $oProduct = $this->find($id);
-        return $oProduct;
-    }
+    
     public function updateProduct($request, $id) {
         $oProduct = $this->find($id);
         $oProduct->name = $request->name;

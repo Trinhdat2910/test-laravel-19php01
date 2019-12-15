@@ -11,18 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home.index');
-})->name('home');
+Route::get('/',['as' => 'home.index', 'uses' =>'HomeController@index']);
+Route::get('/home',['as' => 'home', 'uses' =>'HomeController@index']);
+Route::get('/collection/{key}',['as' => 'home.collection', 'uses' =>'HomeController@collection']);
+Route::get('/products/{id}',['as' => 'home.product.detail', 'uses' =>'ProductsController@detail']);
+Route::get('/getZise',['as' => 'home.product.getSize', 'uses' =>'ProductsController@getSize']);
 Route::get('/about', function () {
     return view('home.about');
 });
-Route::get('/men', function () {
-    return view('home.men.index');
-});
-Route::get('/detail', function () {
-    return view('home.detail.index');
-});
+
+
 // Route::get('/home', function () {
 //     return view('home');
 // })->name('home');
@@ -33,7 +31,17 @@ Route::group(['namespace' => 'Auth'], function() {
     Route::post('/register', ['as' => 'register', 'uses' => 'RegisterController@create']);
 });
 Auth::routes();
+Route::group(['middleware' => 'verified'], function(){
+    Route::post('/addCart',['as' => 'home.product.addCart', 'uses' =>'CartController@addCart']);
+    Route::get('/cart',['as' => 'home.cart', 'uses' =>'CartController@getCart']);
+    Route::get('/removeItemCart/{id}',['as' => 'home.cart.removeItem', 'uses' =>'CartController@removeItemCart']);
+    Route::post('/updateCart',['as' => 'home.cart.updateCart', 'uses' =>'CartController@updateCart']);
+    Route::post('/cart/order',['as' => 'home.products.order', 'uses' =>'CartController@orderCart']);
+    Route::get('/order',['as' => 'home.products.getOrder', 'uses' =>'CartController@getOrderByUser']);
+    Route::get('/profile/{id}',['as' => 'home.user.getProfile', 'uses' =>'UsersController@getProfile']);
+    Route::post('/profile/{id}',['as' => 'home.user.update', 'uses' =>'UsersController@update']);
 
+});
 Route::group(['namespace' => 'Admin', 'middleware' => 'verified', 'middleware' => 'administrator'], function(){
     Route::get('/admin', 'HomeController@index')->name('admin');
     Route::group(['prefix'=>'admin'], function() {
@@ -74,6 +82,18 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'verified', 'middleware' =
             Route::post('/edit/{id}', ['as' => 'admin.users.postEdit', 'uses' =>'UsersController@postEdit']);
             Route::get('/delete/{id}', ['as' => 'admin.users.delete', 'uses' =>'UsersController@delete']);
             Route::get('/detail/{id}', ['as' => 'admin.users.detail', 'uses' =>'UsersController@detail']);
+            Route::get('/add', ['as' => 'admin.users.add', 'uses' =>'UsersController@getAdd']);
+            Route::post('/add', ['as' => 'admin.users.postAdd', 'uses' =>'UsersController@postAdd']);
+        });
+        Route::group(['prefix'=>'transaction'], function() {
+            Route::get('/list', ['as' => 'admin.transaction.list', 'uses' =>'TransactionController@index']);
+        });
+        Route::group(['prefix'=>'order'], function() {
+            Route::get('/list', ['as' => 'admin.order.list', 'uses' =>'OrderController@index']);
+            Route::get('/detail/{id}', ['as' => 'admin.order.detail', 'uses' =>'OrderController@detail']);
+            Route::get('/edit/{id}', ['as' => 'admin.order.edit', 'uses' =>'OrderController@edit']);
+            Route::post('/update/{id}', ['as' => 'admin.order.update', 'uses' =>'OrderController@update']);
+            Route::get('/delete/{id}', ['as' => 'admin.order.delete', 'uses' =>'OrderController@delete']);
         });
     });
 });

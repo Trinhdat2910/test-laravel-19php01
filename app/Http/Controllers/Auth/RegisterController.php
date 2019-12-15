@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -52,6 +53,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone' => ['required', 'numeric'],
+            'address' => ['required', 'string'],
         ]);
     }
 
@@ -67,7 +70,10 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => 1,
+            'phone_number' => $data['phone'],
+            'address' => $data['address'],
+            'role_id' => 1,
+            'email_verified_at' => Carbon::now()
         ]);
     }
 }

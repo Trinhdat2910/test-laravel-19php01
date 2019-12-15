@@ -47,6 +47,6 @@ class LoginController extends Controller
             return route('admin');
         }
         /// is user
-        return route('home');
+        return route('home.index');
     }
 }

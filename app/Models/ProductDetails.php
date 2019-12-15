@@ -24,7 +24,7 @@ class ProductDetails extends Model
      * @retun mix
      */
     public function product() {
-        return $this->belongsTo('App\Models\Products', 'product_id', 'id');
+        return $this->belongsTo('App\Models\Products', 'products_id', 'id');
     }
     public function getProductDetailById($id) {
         $listProductDetail = $this->where('products_id', $id)->get();
@@ -42,5 +42,9 @@ class ProductDetails extends Model
             return self::RETURN_STR_ZERO;
         }
         return $newProductDetails;
+    }
+    public function getStatusById($id) {
+        $oProductDetail = $this->find($id);
+        return $oProductDetail;
     }
 }

@@ -23,17 +23,17 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">LIST SUPPLIER</h3>
+              <h3 class="card-title">Danh sách Nhà cung cấp</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example2" class="table table-bordered table-hover">
+              <table id="dssupplier" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>Name</th>
-                  <th>Phone</th>
-                  <th>Address</th>
+                  <th>Tên</th>
+                  <th>Số điện thoại</th>
+                  <th>Địa chỉ</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -56,9 +56,9 @@
                 <tfoot>
                 <tr>
                     <th>#</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Address</th>
+                    <th>Tên</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
                     <th>Action</th>
                 </tr>
                 </tfoot>
@@ -76,3 +76,17 @@
 </div>
 @endsection
 @section('script')
+<script>
+    $(document).ready(function(){
+      $('#dssupplier').DataTable();
+        @if(Session::has('message'))
+            @if (Session::get('class') == 'error')
+                toastr.error('{{ Session::get('message') }}')
+            @else
+                toastr.success('{{ Session::get('message') }}')
+            @endif
+        @endif
+        
+    })
+</script>
+@endsection

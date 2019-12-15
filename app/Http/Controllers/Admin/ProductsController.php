@@ -51,16 +51,28 @@ class ProductsController extends Controller
       $newProducts = $this->products->addNewProduct($request);
 
       if($newProducts == self::RETURN_STR_ZERO){
-        return redirect('/admin/products/add');
+        return redirect('/admin/products/add')->with([
+          'message' => 'Thêm Sản phẩm lỗi',
+          'class' => 'error'
+      ]);
       }
-      return redirect('/admin/products/list');
+      return redirect('/admin/products/list')->with([
+        'message' => 'Thêm thành công',
+        'class' => 'success'
+    ]);
     }
     public function delete($id){
       $oProduct = $this->products->deleteProducts($id);
       if($oProduct == self::RETURN_STR_ZERO){
-          return redirect()->back();
+          return redirect()->back()->with([
+            'message' => 'Xoá lỗi',
+            'class' => 'error'
+        ]);
       }
-      return redirect('/admin/products/list');
+      return redirect('/admin/products/list')->with([
+        'message' => 'Xoá thành công',
+        'class' => 'success'
+    ]);
     }
     public function getEdit($id){
       $oProduct = $this->products->getProductById($id);
@@ -73,9 +85,15 @@ class ProductsController extends Controller
     public function postEdit(EditProductsRequest $request, $id){
       $oProduct = $this->products->updateProduct($request, $id);
       if($oProduct == self::RETURN_STR_ZERO){
-          return redirect()->back();
+          return redirect()->back()->with([
+            'message' => 'Cập nhật lỗi',
+            'class' => 'error'
+        ]);
       }
-      return redirect('/admin/products/list');
+      return redirect('/admin/products/list')->with([
+        'message' => 'Cập nhật thành công',
+        'class' => 'success'
+    ]);
     }
     public function detail($id){
       $oProduct = $this->products->getProductById($id);

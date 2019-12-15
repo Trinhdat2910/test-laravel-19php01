@@ -27,15 +27,15 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example2" class="table table-bordered table-hover">
+              <table id="dssp" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Image</th>
-                  <th>Price</th>
-                  <th>Status</th>
+                  <th>Tên</th>
+                  <th>Loại</th>
+                  <th>Hình Ảnh</th>
+                  <th>Giá</th>
+                  <th>Trạng thái</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -48,7 +48,7 @@
                   <td>
                     <img src="{{ asset($products->image)}}" style="width: auto; height: auto;max-width: 150px;max-height: 150px">
                   </td>
-                  <td>{{$products->price}}</td>
+                  <td>{{number_format($products->price)}}</td>
                   <td>
                     @if($products->status == "0")
                       Hết Hàng
@@ -72,11 +72,11 @@
                 <tfoot>
                 <tr>
                     <th>#</th>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Image</th>
-                    <th>Price</th>
-                    <th>Status</th>
+                    <th>Tên</th>
+                    <th>Loại</th>
+                    <th>Hình Ảnh</th>
+                    <th>Giá</th>
+                    <th>Trạng thái</th>
                     <th>Action</th>
                 </tr>
                 </tfoot>
@@ -93,4 +93,19 @@
     </section>
 </div>
 @endsection
+
 @section('script')
+<script>
+    $(document).ready(function(){
+      $('#dssp').DataTable();
+        @if(Session::has('message'))
+            @if (Session::get('class') == 'error')
+                toastr.error('{{ Session::get('message') }}')
+            @else
+                toastr.success('{{ Session::get('message') }}')
+            @endif
+        @endif
+        
+    })
+</script>
+@endsection

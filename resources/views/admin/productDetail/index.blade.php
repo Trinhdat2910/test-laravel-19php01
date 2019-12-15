@@ -12,7 +12,7 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Products Detail</li>
+                <li class="breadcrumb-item active">Chi tiết sản phẩm</li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
@@ -23,7 +23,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">List Products Detail</h3>
+              <h3 class="card-title">Danh sách chi tiết sản phẩm</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -73,3 +73,16 @@
 </div>
 @endsection
 @section('script')
+<script>
+    $(document).ready(function(){
+        @if(Session::has('message'))
+            @if (Session::get('class') == 'error')
+                toastr.error('{{ Session::get('message') }}')
+            @else
+                toastr.success('{{ Session::get('message') }}')
+            @endif
+        @endif
+        
+    })
+</script>
+@endsection

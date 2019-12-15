@@ -38,6 +38,18 @@ class Orders extends Model
      * @retun mix
      */
     public function orderdetails() {
-        return $this->hasMany('App\Models\OrderDetails', 'order_id', 'id');
+        return $this->hasMany('App\Models\OrderDetail', 'order_id', 'id');
+    }
+    public function getListOrderByUserId($id) {
+        $listOrder = $this->where('user_id',$id)->get();
+        return $listOrder;
+    }
+    public function getListOrder() {
+        $listOrder = $this->all();
+        return $listOrder;
+    }
+    public function getOrderById($id) {
+        $oOrder = $this->find($id);
+        return $oOrder;
     }
 }

@@ -34,9 +34,15 @@ class SupplierController extends Controller
     public function postAdd(AddSupplierRequest $request){
       $newSupplier = $this->supplier->addNewSupplier($request);
       if($newSupplier == self::RETURN_STR_ZERO){
-        return redirect('/admin/supplier/add');
+        return redirect('/admin/supplier/add')->with([
+            'message' => 'Thêm nhà cung cấp lỗi',
+            'class' => 'error'
+        ]);;
       }
-      return redirect('/admin/supplier/list');
+      return redirect('/admin/supplier/list')->with([
+        'message' => 'Thêm thành công',
+        'class' => 'success'
+    ]);
     }
     public function getEdit($id){
         $oSupplier = $this->supplier->getSupplierById($id);
@@ -48,15 +54,27 @@ class SupplierController extends Controller
     public function postEdit(AddSupplierRequest $request, $id){
         $oSupplier = $this->supplier->updateSupplier($request, $id);
         if($oSupplier == self::RETURN_STR_ZERO){
-            return redirect()->back();
+            return redirect()->back()->with([
+                'message' => 'Cập nhật Lỗi',
+                'class' => 'error'
+            ]);
         }
-        return redirect('/admin/supplier/list');
+        return redirect('/admin/supplier/list')->with([
+            'message' => 'cập nhật thành công',
+            'class' => 'success'
+        ]);
     }
     public function delete($id){
         $oSupplier = $this->supplier->deleteSupplier($id);
         if($oSupplier == self::RETURN_STR_ZERO){
-            return redirect()->back();
+            return redirect()->back()->with([
+                'message' => 'Xoá lỗi',
+                'class' => 'error'
+            ]);
         }
-        return redirect('/admin/supplier/list');
+        return redirect('/admin/supplier/list')->with([
+            'message' => 'Xoá thành công',
+            'class' => 'success'
+        ]);
     }
 }

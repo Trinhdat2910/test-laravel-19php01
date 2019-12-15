@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="{{ asset('layout/plugins/daterangepicker/daterangepicker.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('layout/plugins/summernote/summernote-bs4.css')}}">
+  <link href="{{ asset('layout_home/toastr/toastr.min.css') }}" rel="stylesheet">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -83,10 +84,12 @@
 <script src="{{ asset('layout/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('layout/dist/js/adminlte.js')}}"></script>
+<script src="{{ asset('layout/plugins/ckeditor/ckeditor.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('layout/dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('layout/dist/js/demo.js')}}"></script>
+<script src="{{ asset('layout_home/toastr/toastr.min.js') }}"></script>
 @yield('script')
 </body>
 </html>

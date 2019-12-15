@@ -23,19 +23,19 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">LIST SUPPLIER</h3>
+              <h3 class="card-title">Danh sach người dùng</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example2" class="table table-bordered table-hover">
+              <table id="dsnguoidung" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>Name</th>
+                  <th>Tên </th>
                   <th>Email</th>
-                  <th>Phone</th>
-                  <th>Address</th>
-                  <th>Role</th>
+                  <th>Số điện thoại</th>
+                  <th>Địa chỉ</th>
+                  <th>Quyền sử dụng</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -55,9 +55,9 @@
                         @endif 
                     </td>
                     <td>
-                        <a href="#" class="btn btn-primary rounded-circle ml-3"><i class="fas fa-pen text-white"></i>
+                        <a href="{{ route('admin.users.getEdit', ['id' => $user->id])}}" class="btn btn-primary rounded-circle ml-3"><i class="fas fa-pen text-white"></i>
                         </a>
-                        <a href="#" class="btn btn-danger rounded-circle ml-3"><i class="fas fa-trash-alt text-white"></i>
+                        <a href="{{ route('admin.users.delete', ['id' => $user->id])}}" class="btn btn-danger rounded-circle ml-3"><i class="fas fa-trash-alt text-white"></i>
                         </a>
                     </td>
                 </tr>
@@ -66,11 +66,11 @@
                 <tfoot>
                 <tr>
                     <th>#</th>
-                    <th>Name</th>
+                    <th>Tên </th>
                     <th>Email</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>Role</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Quyền sử dụng</th>
                     <th>Action</th>
                 </tr>
                 </tfoot>
@@ -88,3 +88,17 @@
 </div>
 @endsection
 @section('script')
+<script>
+    $(document).ready(function(){
+      $('#dsnguoidung').DataTable();
+        @if(Session::has('message'))
+            @if (Session::get('class') == 'error')
+                toastr.error('{{ Session::get('message') }}')
+            @else
+                toastr.success('{{ Session::get('message') }}')
+            @endif
+        @endif
+        
+    })
+</script>
+@endsection
